@@ -1,0 +1,220 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&family=Roboto+Slab:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* Editorial color palette */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 8%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 8%;
+
+    /* Editorial yellow accent */
+    --primary: 42 90% 42%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 8%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 220 70% 32%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 42 90% 58%;
+
+    --radius: 0.25rem;
+
+    /* Headlines blue */
+    --headline: 220 70% 32%;
+
+    /* Custom editorial tokens */
+    --editorial-black: 0 0% 8%;
+    --editorial-gray: 0 0% 45%;
+    --editorial-light: 42 40% 96%;
+    --editorial-divider: 0 0% 85%;
+    --editorial-accent: 42 90% 42%;
+
+    /* Typography */
+    --font-serif: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-sans: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 8%;
+    --sidebar-primary: 0 72% 51%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent-foreground: 0 0% 8%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 0 72% 51%;
+  }
+
+  .dark {
+    --background: 0 0% 5%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 0 72% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 95%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 95%;
+
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 0 72% 55%;
+
+    --editorial-black: 0 0% 95%;
+    --editorial-gray: 0 0% 60%;
+    --editorial-light: 0 0% 12%;
+    --editorial-divider: 0 0% 20%;
+
+    --sidebar-background: 0 0% 8%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 0 72% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 18%;
+    --sidebar-ring: 0 72% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    @apply font-semibold tracking-tight;
+    color: hsl(var(--headline));
+  }
+
+  /* Editorial typography classes */
+  .headline-xl {
+    font-family: var(--font-serif);
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold leading-tight;
+  }
+
+  .headline-lg {
+    font-family: var(--font-serif);
+    @apply text-2xl md:text-3xl font-semibold leading-tight;
+  }
+
+  .headline-md {
+    font-family: var(--font-serif);
+    @apply text-xl md:text-2xl font-semibold leading-snug;
+  }
+
+  .headline-sm {
+    font-family: var(--font-serif);
+    @apply text-lg font-medium leading-snug;
+  }
+
+  .body-lg {
+    @apply text-lg leading-relaxed;
+  }
+
+  .body-md {
+    @apply text-base leading-relaxed;
+  }
+
+  .body-sm {
+    @apply text-sm leading-relaxed;
+  }
+
+  .caption {
+    @apply text-xs uppercase tracking-widest font-medium;
+  }
+
+  /* Editorial divider */
+  .editorial-divider {
+    @apply border-t border-editorial-divider;
+  }
+
+  /* Article body styling */
+  .article-body p {
+    @apply mb-6 text-lg leading-relaxed;
+  }
+
+  .article-body h2 {
+    @apply mt-10 mb-4 headline-md;
+  }
+
+  .article-body blockquote {
+    @apply pl-6 border-l-4 border-primary italic my-8 text-xl;
+  }
+}
+
+@layer utilities {
+  .text-editorial-black {
+    color: hsl(var(--editorial-black));
+  }
+  
+  .text-editorial-gray {
+    color: hsl(var(--editorial-gray));
+  }
+  
+  .bg-editorial-light {
+    background-color: hsl(var(--editorial-light));
+  }
+  
+  .border-editorial-divider {
+    border-color: hsl(var(--editorial-divider));
+  }
+
+  .text-editorial-accent {
+    color: hsl(var(--editorial-accent));
+  }
+
+  .bg-editorial-accent {
+    background-color: hsl(var(--editorial-accent));
+  }
+
+  .hover-underline-animation {
+    @apply relative;
+  }
+
+  .hover-underline-animation::after {
+    content: '';
+    @apply absolute left-0 bottom-0 w-0 h-px bg-current transition-all duration-300;
+  }
+
+  .hover-underline-animation:hover::after {
+    @apply w-full;
+  }
+}
