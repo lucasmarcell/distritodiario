@@ -21,7 +21,7 @@ const positions = [
 ];
 
 const editorialSections = [
-  { value: '', label: 'Nenhuma' },
+  { value: 'none', label: 'Nenhuma' },
   { value: 'noticias', label: 'Notícias' },
   { value: 'cultura', label: 'Cultura' },
   { value: 'comportamento', label: 'Comportamento' },
@@ -43,7 +43,7 @@ const initialFormData: MemberFormData = {
   name: '',
   role: '',
   position: 'jornalista',
-  editorial_section: '',
+  editorial_section: 'none',
   bio: '',
   photo_url: '',
   display_order: 0,
@@ -71,7 +71,7 @@ export default function TeamMembersList() {
         name: member.name,
         role: member.role,
         position: member.position,
-        editorial_section: member.editorial_section || '',
+        editorial_section: member.editorial_section || 'none',
         bio: member.bio || '',
         photo_url: member.photo_url || '',
         display_order: member.display_order,
@@ -92,13 +92,13 @@ export default function TeamMembersList() {
         await updateMember.mutateAsync({
           id: editingMember.id,
           ...formData,
-          editorial_section: formData.editorial_section || null,
+          editorial_section: formData.editorial_section === 'none' ? null : formData.editorial_section,
         });
         toast.success('Membro atualizado com sucesso!');
       } else {
         await createMember.mutateAsync({
           ...formData,
-          editorial_section: formData.editorial_section || null,
+          editorial_section: formData.editorial_section === 'none' ? null : formData.editorial_section,
         });
         toast.success('Membro adicionado com sucesso!');
       }
