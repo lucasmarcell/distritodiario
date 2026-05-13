@@ -56,9 +56,11 @@ const App = () => (
             <Route path="/contato" element={<Contato />} />
             <Route path="/politica-de-privacidade" element={<PoliticaPrivacidade />} />
             <Route path="/termos-de-uso" element={<TermosUso />} />
-            <Route path="/minha-conta" element={<MinhaConta />} />
+            
             
             {/* Admin Routes */}
+            <Route path="/minha-conta" element={<MinhaConta />} />
+            
             <Route
               path="/admin"
               element={
