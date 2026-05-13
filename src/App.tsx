@@ -58,9 +58,7 @@ const App = () => (
             <Route path="/termos-de-uso" element={<TermosUso />} />
             
             
-            {/* Admin Routes */}
-            <Route path="/minha-conta" element={<MinhaConta />} />
-            
+            {/* Admin Routes */}            
             <Route
               path="/admin"
               element={
@@ -73,6 +71,7 @@ const App = () => (
               <Route path="materias" element={<ArticlesList />} />
               <Route path="materias/nova" element={<ArticleEditor />} />
               <Route path="materias/:id" element={<ArticleEditor />} />
+              <Route path="minha-conta" element={<MinhaConta />} />
               <Route
                 path="usuarios"
                 element={
