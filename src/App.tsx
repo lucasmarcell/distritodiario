@@ -56,6 +56,7 @@ const App = () => (
             <Route path="/contato" element={<Contato />} />
             <Route path="/politica-de-privacidade" element={<PoliticaPrivacidade />} />
             <Route path="/termos-de-uso" element={<TermosUso />} />
+            <Route path="/minha-conta" element={<MinhaConta />} />
             
             {/* Admin Routes */}
             <Route
@@ -98,7 +99,6 @@ const App = () => (
             </Route>
             
             <Route path="*" element={<NotFound />} />
-            <Route path="minha-conta" element={<MinhaConta />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
