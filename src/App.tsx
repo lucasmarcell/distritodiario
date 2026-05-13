@@ -29,6 +29,7 @@ import TeamMembersList from "./pages/admin/TeamMembersList";
 import SiteSettingsPage from "./pages/admin/SiteSettingsPage";
 import SecuritySettings from "./pages/admin/SecuritySettings";
 import NotFound from "./pages/NotFound";
+import MinhaConta from "./pages/admin/MinhaConta";
 
 const queryClient = new QueryClient();
 
@@ -97,6 +98,7 @@ const App = () => (
             </Route>
             
             <Route path="*" element={<NotFound />} />
+            <Route path="minha-conta" element={<MinhaConta />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
