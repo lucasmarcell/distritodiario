@@ -7,39 +7,19 @@ import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { Plus, Trash2 } from 'lucide-react';
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '@/components/ui/table';
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+  Dialog, DialogContent, DialogDescription, DialogFooter,
+  DialogHeader, DialogTitle, DialogTrigger,
 } from '@/components/ui/dialog';
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from '@/components/ui/select';
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
+  AlertDialogDescription, AlertDialogFooter, AlertDialogHeader,
+  AlertDialogTitle, AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { useAuth } from '@/contexts/AuthContext';
 
@@ -68,24 +48,19 @@ export default function UsersList() {
     try {
       const { data: roles, error } = await supabase
         .from('user_roles')
-        .select(`
-          id,
-          user_id,
-          role,
-          created_at
-        `)
+        .select('id, user_id, role, created_at')
         .order('created_at', { ascending: false });
 
       if (error) throw error;
 
-      // Fetch profiles for each user
+      // Usa maybeSingle() para não quebrar quando perfil não existe
       const usersWithProfiles = await Promise.all(
         (roles || []).map(async (role) => {
           const { data: profile } = await supabase
             .from('profiles')
             .select('name, email')
             .eq('user_id', role.user_id)
-            .single();
+            .maybeSingle(); // ← corrigido: era .single()
 
           return {
             ...role,
@@ -124,12 +99,11 @@ export default function UsersList() {
     setAdding(true);
 
     try {
-      // Find user by email in profiles
       const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .select('user_id')
         .eq('email', newUserEmail)
-        .single();
+        .maybeSingle(); // ← corrigido
 
       if (profileError || !profile) {
         toast({
@@ -141,12 +115,11 @@ export default function UsersList() {
         return;
       }
 
-      // Check if user already has a role
       const { data: existingRole } = await supabase
         .from('user_roles')
         .select('id')
         .eq('user_id', profile.user_id)
-        .single();
+        .maybeSingle(); // ← corrigido
 
       if (existingRole) {
         toast({
@@ -158,7 +131,6 @@ export default function UsersList() {
         return;
       }
 
-      // Add the role
       const { error } = await supabase.from('user_roles').insert({
         user_id: profile.user_id,
         role: newUserRole,
@@ -199,7 +171,6 @@ export default function UsersList() {
 
     try {
       const { error } = await supabase.from('user_roles').delete().eq('id', roleId);
-
       if (error) throw error;
 
       setUsers(users.filter((u) => u.id !== roleId));
@@ -258,9 +229,7 @@ export default function UsersList() {
                 <Label htmlFor="role">Função</Label>
                 <Select
                   value={newUserRole}
-                  onValueChange={(value: 'admin' | 'editor') =>
-                    setNewUserRole(value)
-                  }
+                  onValueChange={(value: 'admin' | 'editor') => setNewUserRole(value)}
                 >
                   <SelectTrigger>
                     <SelectValue />
@@ -314,9 +283,7 @@ export default function UsersList() {
                   </TableCell>
                   <TableCell>{user.profile?.email || '-'}</TableCell>
                   <TableCell>
-                    <Badge
-                      variant={user.role === 'admin' ? 'default' : 'secondary'}
-                    >
+                    <Badge variant={user.role === 'admin' ? 'default' : 'secondary'}>
                       {user.role === 'admin' ? 'Administrador' : 'Editor'}
                     </Badge>
                   </TableCell>
