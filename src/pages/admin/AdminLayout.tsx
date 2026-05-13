@@ -11,7 +11,8 @@ import {
   Home,
   Settings,
   UsersRound,
-  Shield
+  Shield,
+  UserCircle
 } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
@@ -25,6 +26,7 @@ export default function AdminLayout() {
     { label: 'Dashboard', path: '/admin', icon: LayoutDashboard },
     { label: 'Matérias', path: '/admin/materias', icon: FileText },
     { label: 'Segurança', path: '/admin/seguranca', icon: Shield },
+    { label: 'Minha Conta', path: '/admin/minha-conta', icon: UserCircle },
     ...(isAdmin ? [
       { label: 'Usuários', path: '/admin/usuarios', icon: Users },
       { label: 'Equipe', path: '/admin/equipe', icon: UsersRound },
